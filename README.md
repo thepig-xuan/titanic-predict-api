@@ -8,8 +8,8 @@
 ## 环境
 
 - conda 环境：`ai_learning`
-- 安装依赖：`pip install -r requirements.txt
--Python 3.x，建议用 conda 建独立环境
+- 安装依赖：`pip install -r requirements.txt`
+- Python 3.x，建议用 conda 建独立环境
 
 ## 怎么跑
 
@@ -27,21 +27,19 @@
 
 
 ## 接口
-{
-  "passengers": [
-    {"pclass": 1, "sex": 0, "age": 30, "fare": 100},
-    {"pclass": 3, "sex": 1, "age": 22, "fare": 8}
-  ]
-}
+
+服务启动后有两个接口，都在 http://127.0.0.1:8000/docs 里可以直接试。
+
+### POST /predict_one —— 预测一个人
+请求：{...}
+返回：{"prob": 0.8343}
+
+### POST /predict_batch —— 一次预测多人
+请求：{"passengers": [...]}
+返回：{"results": [0.8343, 0.1032]}
+结果顺序与传入顺序一致
 
 
-复制粘贴进去测试
-
-返回示例：
-{
-  "survived_prob": 0.8343,
-  "verdict": "存活概率高"
-}
 
 ## 自检（改特征顺序后必跑）
 
