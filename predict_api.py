@@ -1,5 +1,5 @@
 from typing import List
-
+from pathlib import Path
 from fastapi import FastAPI
 import torch
 import torch.nn as nn
@@ -18,8 +18,9 @@ class TitanicModel(nn.Module):
         x = self.layer2(x)
         return x
 
+MODEL_PATH = Path(__file__).parent / "titanic_model.pt"
 model = TitanicModel()
-model.load_state_dict(torch.load("titanic_model.pt"))
+model.load_state_dict(torch.load(MODEL_PATH))
 model.eval()
 
 app = FastAPI()
