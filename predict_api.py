@@ -44,7 +44,7 @@ def predict_one(t : Titanic):
         prob = torch.sigmoid(logit)
 
     return{
-        "prob" :prob.item(),
+        "prob" :round(prob.item(),4)
     }
 @app.post("/predict_batch")
 def predict_batch(req : BatchRequest):
