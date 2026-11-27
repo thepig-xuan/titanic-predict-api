@@ -1,7 +1,7 @@
 import torch
-from predict_api import model,FEATURES,app
+from predict_api import model,app
 from fastapi.testclient import TestClient
-
+from config import FEATURES
 
 def test_model_output_shape():
     x = torch.randn(3,len(FEATURES))

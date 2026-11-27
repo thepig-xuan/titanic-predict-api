@@ -1,5 +1,5 @@
 import numpy as np
-import pandas as pd
+from model import TitanicModel
 import seaborn as sns
 import torch
 from sklearn.model_selection import train_test_split
@@ -51,18 +51,7 @@ test_loader = DataLoader(dataset = test_dataset,batch_size = 32,shuffle = False)
 
 
 
-class TitanicModel(nn.Module):
-    def __init__(self):#定义方法
-        super().__init__()
-        self.layer1 = nn.Linear(6,16)#算出来中间数据
-        self.relu = nn.ReLU()#负数变成零
-        self.layer2 = nn.Linear(16,1)#把layer1输出的16组w和b压成1组，就是最终的预测结果
 
-    def forward(self, x):#定义执行顺序
-        x = self.layer1(x)
-        x = self.relu(x)#负数变成零
-        x = self.layer2(x)
-        return x
 
 model = TitanicModel()
 print(model)
@@ -132,5 +121,9 @@ for i, (x, real, pred) in enumerate(wrong_cases[:5]):  # 只看前5个
 
 
 
-torch.save(model.state_dict(),"titanic_model.pt")
+torch.save({
+    "state_dict": model.state_dict(),
+    "features": FEATURES,
+}, "titanic_model.pt")
+
 print("模型已保存")
